@@ -2,16 +2,13 @@ require('dotenv').config()
 const request = require('superagent')
 const { createWriteStream } = require('fs')
 
-const URL = 'https://slack.com/api/search.messages'
-const QUERY = '“The *Salesforce Service* added a location” in:#salesforce-to-karma after:2018-05-31'
-
 const file = createWriteStream(`./${process.env.FILE_NAME}`);
 file.write(`WHERE id IN (\n`);
 
 const getMessage = async page => request
-  .get(URL)
+  .get(process.env.URL)
   .query({ token: process.env.SLACK_TOKEN })
-  .query({ query: QUERY })
+  .query({ query: process.env.QUERY })
   .query({ page: page })
   .then(res => {
     const messages = res.body.messages
@@ -34,7 +31,6 @@ const getMessage = async page => request
     if (hasMore) {
       return setTimeout(() => getMessage(page + 1), 3500)
     }
-    console.log('ids', ids.length)
     file.write(`)`);
     file.end()
     return 'All finnished!'
