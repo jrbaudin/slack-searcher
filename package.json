@@ -1,0 +1,16 @@
+{
+  "name": "slack-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Joel <joel.baudin88@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "superagent": "^4.0.0"
+  }
+}
